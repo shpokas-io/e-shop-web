@@ -1,0 +1,19 @@
+.header {
+  @apply bg-primary py-4 shadow-md;
+}
+
+.container {
+  @apply max-w-7xl mx-auto px-4 flex justify-between items-center;
+}
+
+.logo {
+  @apply text-white text-2xl font-bold;
+}
+
+.navList {
+  @apply flex gap-4;
+}
+
+.navLink {
+  @apply text-white hover:text-light;
+}
