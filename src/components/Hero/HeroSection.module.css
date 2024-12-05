@@ -1,0 +1,20 @@
+.hero {
+  @apply bg-cover bg-center min-h-screen flex items-center justify-center;
+  background-image: url("/assets/hero-bg.jpg");
+}
+
+.content {
+  @apply text-center text-white;
+}
+
+.title {
+  @apply text-4xl font-bold mb-4;
+}
+
+.subtitle {
+  @apply text-xl mb-6;
+}
+
+.ctaButton {
+  @apply bg-secondary text-white py-2 px-6 rounded hover:bg-dark;
+}
