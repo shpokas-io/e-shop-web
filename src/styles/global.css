@@ -1,0 +1,7 @@
+body {
+  @apply bg-accent text-secondary font-sans;
+}
+
+a {
+  @apply text-primary hover:underline;
+}
