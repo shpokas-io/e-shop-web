@@ -1,11 +1,11 @@
-import "./index.css";
+import HomePage from "./pages/HomePage";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <h1 className="text-bold text-4xl text-red-800">test</h1>
+    <div className="font-sans">
+      <HomePage />
     </div>
   );
-}
+};
 
 export default App;
