@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -9,20 +9,41 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Header: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleDrawer = (open: boolean) => () => {
+    setMenuOpen(open);
+  };
+
+  const menuItems = [
+    "Categories",
+    "Jewelry",
+    "Electronics",
+    "Wardrobe",
+    "Contacts",
+  ];
 
   return (
     <AppBar position="sticky" color="default" sx={{ boxShadow: 1 }}>
-      <Toolbar>
+      <Toolbar sx={{ justifyContent: "space-between" }}>
         {isMobile ? (
           <>
             {/* Mobile View */}
-            <IconButton edge="start" color="inherit" aria-label="menu">
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={toggleDrawer(true)}
+            >
               <MenuIcon />
             </IconButton>
             <Typography
@@ -38,10 +59,7 @@ const Header: React.FC = () => {
         ) : (
           <>
             {/* Desktop View */}
-            <Typography
-              variant="h6"
-              sx={{ marginRight: 2, fontWeight: "bold" }}
-            >
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
               My E-Shop
             </Typography>
             <Box
@@ -51,8 +69,8 @@ const Header: React.FC = () => {
                 backgroundColor: theme.palette.grey[200],
                 borderRadius: theme.shape.borderRadius,
                 padding: "0 10px",
-                width: "100%",
-                maxWidth: "400px",
+                width: "400px",
+                margin: "0 auto",
               }}
             >
               <InputBase
@@ -64,11 +82,30 @@ const Header: React.FC = () => {
                 <SearchIcon />
               </IconButton>
             </Box>
-            <Box
-              sx={{ display: "flex", alignItems: "center", marginLeft: "auto" }}
-            >
-              <Typography variant="body1" sx={{ marginRight: 2 }}>
-                +370 638 22222
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+              <Typography
+                variant="body1"
+                component="a"
+                href="#list"
+                sx={{ textDecoration: "none", color: "inherit" }}
+              >
+                List
+              </Typography>
+              <Typography
+                variant="body1"
+                component="a"
+                href="#testpage"
+                sx={{ textDecoration: "none", color: "inherit" }}
+              >
+                Test Page
+              </Typography>
+              <Typography
+                variant="body1"
+                component="a"
+                href="#testpage2"
+                sx={{ textDecoration: "none", color: "inherit" }}
+              >
+                Testpage
               </Typography>
               <IconButton>
                 <PersonIcon />
@@ -80,6 +117,30 @@ const Header: React.FC = () => {
           </>
         )}
       </Toolbar>
+
+      {/* Drawer for Mobile Menu */}
+      <Drawer anchor="left" open={menuOpen} onClose={toggleDrawer(false)}>
+        <Box
+          sx={{
+            width: 250,
+            padding: 2,
+          }}
+          role="presentation"
+          onClick={toggleDrawer(false)}
+          onKeyDown={toggleDrawer(false)}
+        >
+          <Typography variant="h6" sx={{ marginBottom: 2, fontWeight: "bold" }}>
+            Menu
+          </Typography>
+          <List>
+            {menuItems.map((text) => (
+              <ListItem button key={text}>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
     </AppBar>
   );
 };
