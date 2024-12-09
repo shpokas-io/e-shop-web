@@ -13,6 +13,7 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -34,89 +35,89 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <AppBar position="sticky" color="default" sx={{ boxShadow: 1 }}>
-      <Toolbar sx={{ justifyContent: "space-between" }}>
-        {isMobile ? (
-          <>
-            {/* Mobile View */}
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={toggleDrawer(true)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              sx={{ flexGrow: 1, textAlign: "center", fontWeight: "bold" }}
-            >
-              My E-Shop
-            </Typography>
-            <IconButton edge="end" color="inherit">
-              <ShoppingCartIcon />
-            </IconButton>
-          </>
-        ) : (
-          <>
-            {/* Desktop View */}
-            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-              My E-Shop
-            </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                backgroundColor: theme.palette.grey[200],
-                borderRadius: theme.shape.borderRadius,
-                padding: "0 10px",
-                width: "400px",
-                margin: "0 auto",
-              }}
-            >
-              <InputBase
-                placeholder="Search products..."
-                inputProps={{ "aria-label": "search" }}
-                sx={{ flexGrow: 1 }}
-              />
-              <IconButton>
-                <SearchIcon />
+    <>
+      {/* AppBar for Navigation */}
+      <AppBar position="sticky" color="default" sx={{ boxShadow: 1 }}>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          {isMobile ? (
+            <>
+              {/* Mobile View */}
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={toggleDrawer(true)}
+              >
+                <MenuIcon />
               </IconButton>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Typography
-                variant="body1"
-                component="a"
-                href="#list"
-                sx={{ textDecoration: "none", color: "inherit" }}
+                variant="h6"
+                sx={{ flexGrow: 1, textAlign: "center", fontWeight: "bold" }}
               >
-                List
+                My E-Shop
               </Typography>
-              <Typography
-                variant="body1"
-                component="a"
-                href="#testpage"
-                sx={{ textDecoration: "none", color: "inherit" }}
-              >
-                Test Page
-              </Typography>
-              <Typography
-                variant="body1"
-                component="a"
-                href="#testpage2"
-                sx={{ textDecoration: "none", color: "inherit" }}
-              >
-                Testpage
-              </Typography>
-              <IconButton>
-                <PersonIcon />
-              </IconButton>
-              <IconButton>
+              <IconButton edge="end" color="inherit">
                 <ShoppingCartIcon />
               </IconButton>
-            </Box>
-          </>
+            </>
+          ) : (
+            <>
+              {/* Desktop View */}
+              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                My E-Shop
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: theme.palette.grey[200],
+                  borderRadius: theme.shape.borderRadius,
+                  padding: "0 10px",
+                  width: "400px",
+                  margin: "0 auto",
+                }}
+              >
+                <InputBase
+                  placeholder="Search products..."
+                  inputProps={{ "aria-label": "search" }}
+                  sx={{ flexGrow: 1 }}
+                />
+                <IconButton>
+                  <SearchIcon />
+                </IconButton>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <IconButton>
+                  <PersonIcon />
+                </IconButton>
+                <IconButton>
+                  <ShoppingCartIcon />
+                </IconButton>
+              </Box>
+            </>
+          )}
+        </Toolbar>
+        {isMobile && (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: theme.palette.grey[200],
+              borderRadius: theme.shape.borderRadius,
+              padding: "5px 10px",
+              margin: "10px",
+            }}
+          >
+            <InputBase
+              placeholder="Search products..."
+              inputProps={{ "aria-label": "search" }}
+              sx={{ flexGrow: 1 }}
+            />
+            <IconButton>
+              <SearchIcon />
+            </IconButton>
+          </Box>
         )}
-      </Toolbar>
+      </AppBar>
 
       {/* Drawer for Mobile Menu */}
       <Drawer anchor="left" open={menuOpen} onClose={toggleDrawer(false)}>
@@ -124,14 +125,38 @@ const Header: React.FC = () => {
           sx={{
             width: 250,
             padding: 2,
+            display: "flex",
+            flexDirection: "column",
           }}
           role="presentation"
           onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
         >
-          <Typography variant="h6" sx={{ marginBottom: 2, fontWeight: "bold" }}>
-            Menu
-          </Typography>
+          {/* Logo Section */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingBottom: 2,
+              borderBottom: "1px solid #ddd",
+            }}
+          >
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+              My E-Shop
+            </Typography>
+
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <PersonIcon />
+              <Typography variant="body2">Login/Register</Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <ShoppingCartIcon />
+                <Typography variant="body2">0,00 €</Typography>
+              </Box>
+            </Box>
+          </Box>
+
+          {/* Categories Section */}
           <List>
             {menuItems.map((text) => (
               <ListItem button key={text}>
@@ -141,7 +166,7 @@ const Header: React.FC = () => {
           </List>
         </Box>
       </Drawer>
-    </AppBar>
+    </>
   );
 };
 
