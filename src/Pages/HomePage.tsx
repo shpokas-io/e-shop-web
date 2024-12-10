@@ -37,9 +37,7 @@ const HomePage: React.FC = () => {
           <ProductCarousel />
         </>
       )}
-      <Box sx={{ flex: 1, paddingBottom: "20px" }}>
-        <ProductCarousel />
-      </Box>
+      <Box sx={{ flex: 1, paddingBottom: "20px" }}></Box>
       <Footer />
     </Box>
   );

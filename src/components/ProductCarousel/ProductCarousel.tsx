@@ -60,56 +60,65 @@ const ProductCarousel: React.FC = () => {
     >
       <Slider {...settings}>
         {mockProducts.map((product) => (
-          <Card
+          <Box
             key={product.id}
             sx={{
               display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              padding: "20px",
-              boxShadow: 3,
-              borderRadius: 2,
-              transition: "transform 0.3s",
-              "&:hover": {
-                transform: "scale(1.05)",
-              },
+              justifyContent: "center",
+              // You can also add alignItems: "center" if desired
+              // alignItems: "center"
             }}
           >
-            <CardMedia
-              component="img"
-              image={product.image}
-              alt={product.name}
+            <Card
               sx={{
-                width: 200,
-                height: 200,
-                marginBottom: "10px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+                padding: "20px",
+                boxShadow: 3,
                 borderRadius: 2,
-              }}
-            />
-            <CardContent>
-              <Typography variant="h6">{product.name}</Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{ marginTop: "5px" }}
-              >
-                {product.price}
-              </Typography>
-            </CardContent>
-            <Button
-              variant="contained"
-              size="medium"
-              sx={{
-                marginTop: "10px",
-                textTransform: "none",
-                backgroundColor: "#004d61",
-                "&:hover": { backgroundColor: "#003843" },
+                transition: "transform 0.3s",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                },
               }}
             >
-              Buy Now
-            </Button>
-          </Card>
+              <CardMedia
+                component="img"
+                image={product.image}
+                alt={product.name}
+                sx={{
+                  width: 200,
+                  height: 200,
+                  marginBottom: "10px",
+                  borderRadius: 2,
+                }}
+              />
+              <CardContent>
+                <Typography variant="h6">{product.name}</Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ marginTop: "5px" }}
+                >
+                  {product.price}
+                </Typography>
+              </CardContent>
+              <Button
+                variant="contained"
+                size="medium"
+                sx={{
+                  marginTop: "10px",
+                  textTransform: "none",
+                  backgroundColor: "#004d61",
+                  "&:hover": { backgroundColor: "#003843" },
+                }}
+              >
+                Buy Now
+              </Button>
+            </Card>
+          </Box>
         ))}
       </Slider>
     </Box>
