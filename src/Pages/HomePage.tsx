@@ -34,10 +34,11 @@ const HomePage: React.FC = () => {
       {isTabletOrMobile && (
         <>
           <CategorySectionMobile />
-          <ProductCarousel />
         </>
       )}
-      <Box sx={{ flex: 1, paddingBottom: "20px" }}></Box>
+      <Box sx={{ flex: 1, paddingBottom: "10px" }}>
+        <ProductCarousel />
+      </Box>
       <Footer />
     </Box>
   );
