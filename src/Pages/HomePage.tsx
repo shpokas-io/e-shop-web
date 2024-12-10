@@ -4,6 +4,7 @@ import DesktopNav from "../components/DesktopNav/DesktopNav";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CategorySectionMobile from "../components/CategorySection/CategorySectionMobile";
+import ProductCarousel from "../components/ProductCarousel/ProductCarousel";
 
 const HomePage: React.FC = () => {
   const theme = useTheme();
@@ -14,7 +15,12 @@ const HomePage: React.FC = () => {
     <>
       <Header />
       {isDesktop && <DesktopNav />}
-      {isTabletOrMobile && <CategorySectionMobile />}
+      {isTabletOrMobile && (
+        <>
+          <CategorySectionMobile />
+          <ProductCarousel />
+        </>
+      )}
     </>
   );
 };
