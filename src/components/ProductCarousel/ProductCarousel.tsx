@@ -7,6 +7,9 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 const mockProducts = [
   {
     id: 1,
@@ -41,10 +44,19 @@ const ProductCarousel: React.FC = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
   };
 
   return (
-    <Box sx={{ marginTop: "20px", padding: "10px" }}>
+    <Box
+      sx={{
+        marginTop: "20px",
+        padding: "10px",
+        maxWidth: 300,
+        margin: "0 auto",
+      }}
+    >
       <Slider {...settings}>
         {mockProducts.map((product) => (
           <Card
@@ -53,6 +65,8 @@ const ProductCarousel: React.FC = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
               padding: "20px",
               boxShadow: 3,
               borderRadius: 2,
@@ -64,14 +78,19 @@ const ProductCarousel: React.FC = () => {
               alt={product.name}
               sx={{ width: 150, height: 150, marginBottom: "10px" }}
             />
-            <CardContent>
-              <Typography variant="h6" sx={{ textAlign: "center" }}>
-                {product.name}
-              </Typography>
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              <Typography variant="h6">{product.name}</Typography>
               <Typography
                 variant="body2"
                 color="text.secondary"
-                sx={{ textAlign: "center", marginTop: "5px" }}
+                sx={{ marginTop: "5px" }}
               >
                 {product.price}
               </Typography>
