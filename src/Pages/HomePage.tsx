@@ -5,6 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CategorySectionMobile from "../components/CategorySection/CategorySectionMobile";
 import ProductCarousel from "../components/ProductCarousel/ProductCarousel";
+import Footer from "../components/Footer/Footer";
 
 const HomePage: React.FC = () => {
   const theme = useTheme();
@@ -21,6 +22,7 @@ const HomePage: React.FC = () => {
           <ProductCarousel />
         </>
       )}
+      <Footer />
     </>
   );
 };

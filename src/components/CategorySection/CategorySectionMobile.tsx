@@ -20,10 +20,9 @@ const categories = [
 
 const CategorySectionMobile: React.FC = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTabletOrMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  if (!isMobile) return null;
-
+  if (!isTabletOrMobile) return null;
   return (
     <Box sx={{ padding: "20px" }}>
       <Grid container spacing={2}>
