@@ -22,7 +22,7 @@ const CategorySectionMobile: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  if (!isMobile) return null; // Render only on mobile
+  if (!isMobile) return null;
 
   return (
     <Box sx={{ padding: "20px" }}>
