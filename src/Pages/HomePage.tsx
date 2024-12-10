@@ -3,10 +3,11 @@ import Header from "../components/Header/Header";
 import DesktopNav from "../components/DesktopNav/DesktopNav";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import CategorySectionMobile from "../components/CategorySection/CategorySectionMobile";
+import CategorySectionMobile from "../components/CategorySection/CategorySection";
 import ProductCarousel from "../components/ProductCarousel/ProductCarousel";
 import Footer from "../components/Footer/Footer";
 import HeroSection from "../components/HeroSection/HeroSection";
+import CategorySection from "../components/CategorySection/CategorySection";
 
 const HomePage: React.FC = () => {
   const theme = useTheme();
@@ -20,6 +21,7 @@ const HomePage: React.FC = () => {
         <>
           <DesktopNav />
           <HeroSection />
+          <CategorySection />
         </>
       )}
       {isTabletOrMobile && (

@@ -18,27 +18,41 @@ const categories = [
   { id: 4, icon: <DiamondIcon fontSize="large" />, label: "Jewelry" },
 ];
 
-const CategorySectionMobile: React.FC = () => {
+const CategorySection: React.FC = () => {
   const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const isTabletOrMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  if (!isTabletOrMobile) return null;
   return (
     <Box sx={{ padding: "20px" }}>
-      <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={isDesktop ? 4 : 2}
+        sx={{ justifyContent: "center" }}
+      >
         {categories.map((category) => (
-          <Grid item xs={6} key={category.id}>
+          <Grid item xs={isTabletOrMobile ? 6 : 3} key={category.id}>
             <Card
               sx={{
                 textAlign: "center",
                 borderRadius: "12px",
-                boxShadow: 2,
-                padding: "10px",
+                boxShadow: 3,
+                padding: isDesktop ? "20px" : "10px",
+                transition: "transform 0.3s",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                },
               }}
             >
               <CardContent>
-                {category.icon}
-                <Typography variant="body1" sx={{ marginTop: "10px" }}>
+                {React.cloneElement(category.icon, {
+                  fontSize: isDesktop ? "large" : "medium",
+                  style: { color: "#004d61" },
+                })}
+                <Typography
+                  variant={isDesktop ? "h6" : "body1"}
+                  sx={{ marginTop: "10px", fontWeight: "bold" }}
+                >
                   {category.label}
                 </Typography>
               </CardContent>
@@ -47,11 +61,12 @@ const CategorySectionMobile: React.FC = () => {
         ))}
       </Grid>
       <Typography
-        variant="h6"
+        variant="h5"
         sx={{
-          marginTop: "20px",
+          marginTop: "30px",
           textAlign: "center",
           fontWeight: "bold",
+          color: "#004d61",
         }}
       >
         OFFERS
@@ -60,4 +75,4 @@ const CategorySectionMobile: React.FC = () => {
   );
 };
 
-export default CategorySectionMobile;
+export default CategorySection;
