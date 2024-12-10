@@ -14,25 +14,25 @@ const mockProducts = [
   {
     id: 1,
     name: "Product 1",
-    image: "https://via.placeholder.com/150",
+    image: "https://via.placeholder.com/300",
     price: "€10.00",
   },
   {
     id: 2,
     name: "Product 2",
-    image: "https://via.placeholder.com/150",
+    image: "https://via.placeholder.com/300",
     price: "€20.00",
   },
   {
     id: 3,
     name: "Product 3",
-    image: "https://via.placeholder.com/150",
+    image: "https://via.placeholder.com/300",
     price: "€30.00",
   },
   {
     id: 4,
     name: "Product 4",
-    image: "https://via.placeholder.com/150",
+    image: "https://via.placeholder.com/300",
     price: "€40.00",
   },
 ];
@@ -45,16 +45,17 @@ const ProductCarousel: React.FC = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
   };
 
   return (
     <Box
       sx={{
-        marginTop: "20px",
-        padding: "10px",
-        maxWidth: 300,
+        marginTop: "40px",
+        padding: "20px",
+        maxWidth: "600px",
         margin: "0 auto",
+        textAlign: "center",
       }}
     >
       <Slider {...settings}>
@@ -65,27 +66,28 @@ const ProductCarousel: React.FC = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
               textAlign: "center",
               padding: "20px",
               boxShadow: 3,
               borderRadius: 2,
+              transition: "transform 0.3s",
+              "&:hover": {
+                transform: "scale(1.05)",
+              },
             }}
           >
             <CardMedia
               component="img"
               image={product.image}
               alt={product.name}
-              sx={{ width: 150, height: 150, marginBottom: "10px" }}
-            />
-            <CardContent
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
+                width: 200,
+                height: 200,
+                marginBottom: "10px",
+                borderRadius: 2,
               }}
-            >
+            />
+            <CardContent>
               <Typography variant="h6">{product.name}</Typography>
               <Typography
                 variant="body2"
@@ -97,8 +99,13 @@ const ProductCarousel: React.FC = () => {
             </CardContent>
             <Button
               variant="contained"
-              size="small"
-              sx={{ marginTop: "10px", textTransform: "none" }}
+              size="medium"
+              sx={{
+                marginTop: "10px",
+                textTransform: "none",
+                backgroundColor: "#004d61",
+                "&:hover": { backgroundColor: "#003843" },
+              }}
             >
               Buy Now
             </Button>

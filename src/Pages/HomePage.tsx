@@ -8,6 +8,7 @@ import ProductCarousel from "../components/ProductCarousel/ProductCarousel";
 import Footer from "../components/Footer/Footer";
 import HeroSection from "../components/HeroSection/HeroSection";
 import CategorySection from "../components/CategorySection/CategorySection";
+import Box from "@mui/material/Box";
 
 const HomePage: React.FC = () => {
   const theme = useTheme();
@@ -15,7 +16,13 @@ const HomePage: React.FC = () => {
   const isTabletOrMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
       <Header />
       {isDesktop && (
         <>
@@ -30,8 +37,11 @@ const HomePage: React.FC = () => {
           <ProductCarousel />
         </>
       )}
+      <Box sx={{ flex: 1, paddingBottom: "20px" }}>
+        <ProductCarousel />
+      </Box>
       <Footer />
-    </>
+    </Box>
   );
 };
 
