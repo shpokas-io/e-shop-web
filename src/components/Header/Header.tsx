@@ -14,12 +14,13 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
+import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Header: React.FC = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobileOrTablet = useMediaQuery(theme.breakpoints.down("md"));
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleDrawer = (open: boolean) => () => {
@@ -27,21 +28,20 @@ const Header: React.FC = () => {
   };
 
   const menuItems = [
-    "Categories",
-    "Jewelry",
+    "Men's Clothes",
+    "Women's Clothes",
     "Electronics",
+    "Jewelry",
     "Wardrobe",
-    "Contacts",
   ];
 
   return (
     <>
-      {/* AppBar for Navigation */}
       <AppBar position="sticky" color="default" sx={{ boxShadow: 1 }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          {isMobile ? (
+          {isMobileOrTablet ? (
             <>
-              {/* Mobile View */}
+              {/* Mobile/Tablet View */}
               <IconButton
                 edge="start"
                 color="inherit"
@@ -96,30 +96,9 @@ const Header: React.FC = () => {
             </>
           )}
         </Toolbar>
-        {isMobile && (
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: theme.palette.grey[200],
-              borderRadius: theme.shape.borderRadius,
-              padding: "5px 10px",
-              margin: "10px",
-            }}
-          >
-            <InputBase
-              placeholder="Search products..."
-              inputProps={{ "aria-label": "search" }}
-              sx={{ flexGrow: 1 }}
-            />
-            <IconButton>
-              <SearchIcon />
-            </IconButton>
-          </Box>
-        )}
       </AppBar>
 
-      {/* Drawer for Mobile Menu */}
+      {/* Drawer for Mobile/Tablet Menu */}
       <Drawer anchor="left" open={menuOpen} onClose={toggleDrawer(false)}>
         <Box
           sx={{
@@ -129,8 +108,6 @@ const Header: React.FC = () => {
             flexDirection: "column",
           }}
           role="presentation"
-          onClick={toggleDrawer(false)}
-          onKeyDown={toggleDrawer(false)}
         >
           {/* Logo Section */}
           <Box
@@ -142,25 +119,43 @@ const Header: React.FC = () => {
               borderBottom: "1px solid #ddd",
             }}
           >
-            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: "bold", textAlign: "center" }}
+            >
               My E-Shop
             </Typography>
+          </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <PersonIcon />
-              <Typography variant="body2">Login/Register</Typography>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <ShoppingCartIcon />
-                <Typography variant="body2">0,00 €</Typography>
-              </Box>
-            </Box>
+          {/* Login/Register and Cart Section */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingY: 2,
+              borderBottom: "1px solid #ddd",
+            }}
+          >
+            <Button
+              startIcon={<PersonIcon />}
+              sx={{ textTransform: "none", fontWeight: "bold" }}
+            >
+              Login/Register
+            </Button>
+            <Button
+              startIcon={<ShoppingCartIcon />}
+              sx={{ textTransform: "none", fontWeight: "bold" }}
+            >
+              0,00 €
+            </Button>
           </Box>
 
           {/* Categories Section */}
           <List>
-            {menuItems.map((text) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
+            {menuItems.map((item) => (
+              <ListItem button key={item}>
+                <ListItemText primary={item} />
               </ListItem>
             ))}
           </List>
