@@ -6,6 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import CategorySectionMobile from "../components/CategorySection/CategorySectionMobile";
 import ProductCarousel from "../components/ProductCarousel/ProductCarousel";
 import Footer from "../components/Footer/Footer";
+import HeroSection from "../components/HeroSection/HeroSection";
 
 const HomePage: React.FC = () => {
   const theme = useTheme();
@@ -15,7 +16,12 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Header />
-      {isDesktop && <DesktopNav />}
+      {isDesktop && (
+        <>
+          <DesktopNav />
+          <HeroSection />
+        </>
+      )}
       {isTabletOrMobile && (
         <>
           <CategorySectionMobile />
