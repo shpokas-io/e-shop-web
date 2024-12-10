@@ -8,13 +8,13 @@ import CategorySectionMobile from "../components/CategorySection/CategorySection
 const HomePage: React.FC = () => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTabletOrMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <>
       <Header />
       {isDesktop && <DesktopNav />}
-      {isMobile && <CategorySectionMobile />}
+      {isTabletOrMobile && <CategorySectionMobile />}
     </>
   );
 };
