@@ -1,99 +1,67 @@
-import React from "react";
+import React, { FC } from "react";
 import Slider from "react-slick";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
+import {
+  Box,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+  IconButton,
+} from "@mui/material";
+import { styled, useTheme } from "@mui/material/styles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const mockProducts = [
-  {
-    id: 1,
-    name: "Modern Lamp",
-    image: "https://via.placeholder.com/300",
-    price: "€10.00",
-  },
-  {
-    id: 2,
-    name: "Stylish Chair",
-    image: "https://via.placeholder.com/300",
-    price: "€20.00",
-  },
-  {
-    id: 3,
-    name: "Wooden Desk",
-    image: "https://via.placeholder.com/300",
-    price: "€30.00",
-  },
-  {
-    id: 4,
-    name: "Cozy Armchair",
-    image: "https://via.placeholder.com/300",
-    price: "€40.00",
-  },
-  {
-    id: 5,
-    name: "Minimalist Shelf",
-    image: "https://via.placeholder.com/300",
-    price: "€50.00",
-  },
-];
+interface Product {
+  id: number;
+  name: string;
+  image: string;
+  price: string;
+}
 
 interface ArrowProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
-  return (
-    <IconButton
-      onClick={onClick}
-      sx={{
-        position: "absolute",
-        right: -10,
-        top: "50%",
-        transform: "translateY(-50%)",
-        backgroundColor: "white",
-        boxShadow: 3,
-        "&:hover": {
-          backgroundColor: "#f0f0f0",
-        },
-      }}
-    >
-      <ArrowForwardIosIcon fontSize="small" />
-    </IconButton>
-  );
-};
+// Reusable styled components for arrows
+const ArrowButton = styled(IconButton)(({ theme }) => ({
+  position: "absolute",
+  top: "50%",
+  transform: "translateY(-50%)",
+  backgroundColor: theme.palette.common.white,
+  boxShadow: theme.shadows[3],
+  "&:hover": {
+    backgroundColor: theme.palette.grey[200],
+  },
+}));
 
-const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
-  return (
-    <IconButton
-      onClick={onClick}
-      sx={{
-        position: "absolute",
-        left: -10,
-        top: "50%",
-        transform: "translateY(-50%)",
-        backgroundColor: "white",
-        boxShadow: 3,
-        "&:hover": {
-          backgroundColor: "#f0f0f0",
-        },
-        zIndex: 1,
-      }}
-    >
-      <ArrowBackIosNewIcon fontSize="small" />
-    </IconButton>
-  );
-};
+const NextArrow: FC<ArrowProps> = ({ onClick }) => (
+  <ArrowButton onClick={onClick} sx={{ right: -10 }}>
+    <ArrowForwardIosIcon fontSize="small" />
+  </ArrowButton>
+);
 
-const ProductCarousel: React.FC = () => {
+const PrevArrow: FC<ArrowProps> = ({ onClick }) => (
+  <ArrowButton onClick={onClick} sx={{ left: -10, zIndex: 1 }}>
+    <ArrowBackIosNewIcon fontSize="small" />
+  </ArrowButton>
+);
+
+interface ProductCarouselProps {
+  products: Product[];
+  title?: string;
+}
+
+const ProductCarousel: FC<ProductCarouselProps> = ({
+  products,
+  title = "Featured Products",
+}) => {
+  const theme = useTheme();
+
   const settings = {
     dots: true,
     infinite: true,
@@ -106,13 +74,13 @@ const ProductCarousel: React.FC = () => {
     prevArrow: <PrevArrow />,
     responsive: [
       {
-        breakpoint: 960, // tablet
+        breakpoint: 960, // tablet breakpoint
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 600, // mobile
+        breakpoint: 600, // mobile breakpoint
         settings: {
           slidesToShow: 1,
         },
@@ -123,22 +91,24 @@ const ProductCarousel: React.FC = () => {
   return (
     <Box
       sx={{
-        mt: 6,
-        mb: 6,
+        mt: theme.spacing(6),
+        mb: theme.spacing(6),
         px: { xs: 2, md: 6 },
-        maxWidth: "1200px",
+        maxWidth: 1200,
         margin: "0 auto",
         position: "relative",
       }}
     >
-      <Typography
-        variant="h5"
-        sx={{ mb: 2, textAlign: "center", fontWeight: 500 }}
-      >
-        Featured Products
-      </Typography>
+      {title && (
+        <Typography
+          variant="h5"
+          sx={{ mb: 2, textAlign: "center", fontWeight: 500 }}
+        >
+          {title}
+        </Typography>
+      )}
       <Slider {...settings}>
-        {mockProducts.map((product) => (
+        {products.map((product) => (
           <Box key={product.id} sx={{ px: 1 }}>
             <Card
               sx={{
