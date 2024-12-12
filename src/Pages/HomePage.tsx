@@ -36,7 +36,7 @@ const HomePage: React.FC = () => {
           <CategorySectionMobile />
         </>
       )}
-      <Box sx={{ flex: 1, paddingBottom: "10px" }}>
+      <Box sx={{ flex: 1, paddingBottom: "40px" }}>
         <ProductCarousel />
       </Box>
       <Footer />
