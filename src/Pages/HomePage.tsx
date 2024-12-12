@@ -54,7 +54,17 @@ const HomePage = () => {
         minHeight: "100vh",
       }}
     >
-      <Header />
+      <Header
+        brandName="My E-Shop"
+        menuItems={[
+          "Men's Clothes",
+          "Women's Clothes",
+          "Electronics",
+          "Jewelry",
+          "Wardrobe",
+        ]}
+        drawerWidth={250}
+      />{" "}
       {isDesktop ? (
         <>
           <DesktopNav />
