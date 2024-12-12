@@ -1,43 +1,56 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 
-const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  title?: string;
+  subtitle?: string;
+  ctaLabel?: string;
+  onCtaClick?: () => void;
+  backgroundImage?: string;
+}
+
+const HeroSection = ({
+  title = "Welcome to Our E-Shop!",
+  subtitle = "Discover amazing products at unbeatable prices. Shop the latest trends in fashion,electronics, and more!",
+  ctaLabel = "Shop Now",
+  onCtaClick,
+  backgroundImage = "https://via.placeholder.com/1920x400",
+}: HeroSectionProps) => {
+  const theme = useTheme();
+
   return (
     <Box
+      component="section"
       sx={{
-        height: "400px",
-        backgroundImage: "url('https://via.placeholder.com/1920x400')",
+        height: { xs: theme.spacing(50), md: theme.spacing(60) },
+        backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        flexDirection: "column",
-        color: "#fff",
         textAlign: "center",
-        padding: "20px",
+        color: theme.palette.common.white,
+        px: 2,
       }}
     >
-      <Typography
-        variant="h2"
-        sx={{ fontWeight: "bold", marginBottom: "20px" }}
-      >
-        Welcome to Our E-Shop !
+      <Typography variant="h2" sx={{ fontWeight: "bold", mb: 2 }}>
+        {title}
       </Typography>
       <Typography
         variant="h6"
         sx={{
-          marginBottom: "30px",
-          maxWidth: "600px",
-          lineHeight: "1.5",
+          maxWidth: 600,
+          lineHeight: 1.5,
+          mb: 3,
         }}
       >
-        Discover amazing products at unbeatable prices. Shop the latest trends
-        in fashion, electronics, and more!
+        {subtitle}
       </Typography>
       <Button
         variant="contained"
-        color="primary"
         size="large"
+        onClick={onCtaClick}
         sx={{
           textTransform: "none",
           fontWeight: "bold",
@@ -45,7 +58,7 @@ const HeroSection: React.FC = () => {
           "&:hover": { backgroundColor: "#003843" },
         }}
       >
-        Shop Now
+        {ctaLabel}
       </Button>
     </Box>
   );

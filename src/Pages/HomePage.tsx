@@ -58,7 +58,13 @@ const HomePage = () => {
       {isDesktop ? (
         <>
           <DesktopNav />
-          <HeroSection />
+          <HeroSection
+            title="Welcome to Our E-Shop!"
+            subtitle="Discover amazing products at unbeatable prices. Shop the latest trends in fashion, electronics, and more!"
+            ctaLabel="Shop Now"
+            onCtaClick={() => console.log("CTA clicked")}
+            backgroundImage="https://via.placeholder.com/1920x400"
+          />
           <CategorySection />
         </>
       ) : (
