@@ -97,6 +97,11 @@ const MobileDrawerContent: FC<{
         <Button
           startIcon={<ShoppingCartIcon />}
           sx={{ textTransform: 'none', fontWeight: 'bold' }}
+          onClick={(e) => {
+            e.stopPropagation()
+            onClose(e)
+            window.location.href = '/cart'
+          }}
         >
           0,00 €
         </Button>
@@ -145,7 +150,11 @@ const Header: FC<HeaderProps> = ({
               >
                 {brandName}
               </Typography>
-              <IconButton edge="end" color="inherit">
+              <IconButton
+                edge="end"
+                color="inherit"
+                onClick={() => navigate('/cart')}
+              >
                 <ShoppingCartIcon />
               </IconButton>
             </>
@@ -178,7 +187,7 @@ const Header: FC<HeaderProps> = ({
                 <IconButton onClick={() => navigate('/auth')}>
                   <PersonIcon />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={() => navigate('/cart')}>
                   <ShoppingCartIcon />
                 </IconButton>
               </Box>
