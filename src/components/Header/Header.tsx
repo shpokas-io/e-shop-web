@@ -1,4 +1,4 @@
-import { useState, FC, MouseEventHandler } from 'react'
+import { useState, FC } from 'react'
 import {
   AppBar,
   Toolbar,
@@ -39,12 +39,14 @@ const DefaultMenuItems = [
 const MobileDrawerContent: FC<{
   brandName: string
   menuItems: string[]
-  onClose: MouseEventHandler
+  onClose: (e: React.KeyboardEvent | React.MouseEvent) => void
   width: number
 }> = ({ brandName, menuItems, onClose, width }) => {
   const theme = useTheme()
+
   return (
     <Box
+      component="div"
       sx={{
         width,
         display: 'flex',
@@ -52,10 +54,9 @@ const MobileDrawerContent: FC<{
         p: 2,
       }}
       role="presentation"
-      onClick={onClose}
-      onKeyDown={onClose}
+      onClick={(e) => onClose(e)}
+      onKeyDown={(e) => onClose(e)}
     >
-      {/* Brand */}
       <Box
         sx={{
           display: 'flex',
@@ -73,7 +74,6 @@ const MobileDrawerContent: FC<{
         </Typography>
       </Box>
 
-      {/* Login/Register and Cart Section */}
       <Box
         sx={{
           display: 'flex',
@@ -86,10 +86,9 @@ const MobileDrawerContent: FC<{
         <Button
           startIcon={<PersonIcon />}
           sx={{ textTransform: 'none', fontWeight: 'bold' }}
-          // If needed, navigation on mobile menu as well
           onClick={(e) => {
             e.stopPropagation()
-            ;(onClose as Function)()
+            onClose(e)
             window.location.href = '/auth'
           }}
         >
@@ -103,10 +102,9 @@ const MobileDrawerContent: FC<{
         </Button>
       </Box>
 
-      {/* Categories Section */}
       <List>
         {menuItems.map((item) => (
-          <ListItem button key={item}>
+          <ListItem component="div" key={item}>
             <ListItemText primary={item} />
           </ListItem>
         ))}
@@ -133,7 +131,6 @@ const Header: FC<HeaderProps> = ({
       <AppBar position="sticky" color="default" sx={{ boxShadow: 1 }}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           {isMobileOrTablet ? (
-            // Mobile/Tablet Layout
             <>
               <IconButton
                 edge="start"
@@ -153,7 +150,6 @@ const Header: FC<HeaderProps> = ({
               </IconButton>
             </>
           ) : (
-            // Desktop Layout
             <>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 {brandName}
@@ -191,12 +187,14 @@ const Header: FC<HeaderProps> = ({
         </Toolbar>
       </AppBar>
 
-      {/* Mobile/Tablet Drawer */}
       <Drawer anchor="left" open={menuOpen} onClose={toggleDrawer(false)}>
         <MobileDrawerContent
           brandName={brandName}
           menuItems={menuItems}
-          onClose={toggleDrawer(false)}
+          onClose={(e) => {
+            e.preventDefault()
+            setMenuOpen(false)
+          }}
           width={drawerWidth}
         />
       </Drawer>
